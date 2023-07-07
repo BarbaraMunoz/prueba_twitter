@@ -8,4 +8,4 @@ class Tweet < ApplicationRecord
     [:description, 'A'],
     [:username, 'B']
     ]
-end
+end 
