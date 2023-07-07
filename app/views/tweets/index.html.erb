@@ -1,14 +1,55 @@
-<p style="color: green"><%= notice %></p>
 
-<h1>Tweets</h1>
 
-<div id="tweets">
-  <% @tweets.each do |tweet| %>
-    <%= render tweet %>
-    <p>
-      <%= link_to "Show this tweet", tweet %>
-    </p>
-  <% end %>
+
+
+<div class="row">
+  <div class="col-lg-3">
+    <!-- Sidebar -->
+    <div class="sidebar px-2 pt-3">
+      <!-- Contenido del sidebar -->
+      <%= form_with url: root_path, method: :get do |form| %> <!--gema search-->
+        <!-- Cuadro de búsqueda de tweets anteriores -->
+        <div class="card mb-2">
+          <div class="card-body">
+            <div class="input-group">
+              <%= form.text_field :buscar, class: "form-control", placeholder: "Buscar posts anteriores", value: @filtro %>
+              <%= form.submit 'Buscar', class: "btn btn-outline-primary" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <!-- Widget del sidebar -->
+      <p><%= image_tag("qr", width: 450, class: "img-fluid")%></p>
+    </div>
+  </div>
+
+  
+    <!-- Contenido principal -->
+    <div class="col-lg-7">
+    <%= form_with url: "/crear", method: :create do |form| %>
+      <div class="tweet-form">
+        <div class="card">
+          <div class="card-body">
+            <div class="form-group">
+              <%= form.text_area :description, class: "form-control", placeholder: "Escribe tu post"  %>
+            </div>
+            <div class="form-group py-2">
+              <%= form.text_field :username, class: "form-control", placeholder: "Ingresa tu Usuario" %>
+            </div>
+            <%= form.submit "Enviar", class: "btn btn-primary" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    <!-- tuiters -->
+    <%# Use it in your views %>
+
+    <%== pagy_bootstrap_nav(@pagy) %> <!--gema pagy-->
+    <%= render "tweet" %>
+    <%== pagy_bootstrap_nav(@pagy) %> <!--gema pagy-->
+  </div>
+  <div class="col-lg-2">
+<h1>Hola</h1>
+</div>
 </div>
 
-<%= link_to "New tweet", new_tweet_path %>

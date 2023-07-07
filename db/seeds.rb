@@ -5,3 +5,11 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+
+require 'faker' 
+
+10.times do |i|
+    Tweet.create(description: Faker::Movies::BackToTheFuture.quote, username: Faker::Internet.username)
+end
+
+# rails db:seed -> Para ejecutar la creación de datos
