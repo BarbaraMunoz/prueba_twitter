@@ -1,55 +1,95 @@
-
-
-
-
+<!--Menú lateral--->
 <div class="row">
-  <div class="col-lg-3">
-    <!-- Sidebar -->
-    <div class="sidebar px-2 pt-3">
-      <!-- Contenido del sidebar -->
-      <%= form_with url: root_path, method: :get do |form| %> <!--gema search-->
-        <!-- Cuadro de búsqueda de tweets anteriores -->
-        <div class="card mb-2">
-          <div class="card-body">
-            <div class="input-group">
-              <%= form.text_field :buscar, class: "form-control", placeholder: "Buscar posts anteriores", value: @filtro %>
-              <%= form.submit 'Buscar', class: "btn btn-outline-primary" %>
-            </div>
-          </div>
-        </div>
-      <% end %>
-      <!-- Widget del sidebar -->
-      <p><%= image_tag("qr", width: 450, class: "img-fluid")%></p>
-    </div>
+
+  <div class="col-lg-2">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item d-flex align-items-center pb-4">
+        <i class="fa-solid fa-house pe-3 iconos"></i>
+        <a class="navbar-brand" href="<%= root_path %>"> <strong>Inicio</strong></a>
+      </li>
+      <li class="list-group-item d-flex align-items-center py-4">
+        <i class="fa-solid fa-user pe-3 iconos"></i>
+        <strong>Perfil</strong>
+      </li>
+      <li class="list-group-item d-flex  align-items-center py-4">
+        <i class="fa-solid fa-bell pe-3 iconos"></i>
+        <strong>Notificaciones</strong>
+        <span class="badge bg-primary rounded-pill ms-auto">5</span>
+      </li>
+      <li class="list-group-item d-flex  align-items-center py-4">
+        <i class="fa-solid fa-envelope pe-3 iconos"></i>
+        <strong>Mensajes</strong>
+        <span class="badge bg-primary rounded-pill ms-auto">2</span>
+      </li>
+      <li class="list-group-item d-flex  align-items-center py-4">
+        <i class="fa-solid fa-hashtag pe-3 iconos"></i>
+        <strong> Explorar</strong>
+      </li>
+      <li class="list-group-item d-flex align-items-center py-4">
+        <i class="fa-solid fa-ellipsis pe-3 iconos"></i>
+        <strong> Más</strong>
+      </li>
+    </ul>
   </div>
 
-  
-    <!-- Contenido principal -->
-    <div class="col-lg-7">
-    <%= form_with url: "/crear", method: :create do |form| %>
-      <div class="tweet-form">
-        <div class="card">
-          <div class="card-body">
-            <div class="form-group">
-              <%= form.text_area :description, class: "form-control", placeholder: "Escribe tu post"  %>
-            </div>
-            <div class="form-group py-2">
-              <%= form.text_field :username, class: "form-control", placeholder: "Ingresa tu Usuario" %>
-            </div>
-            <%= form.submit "Enviar", class: "btn btn-primary" %>
-          </div>
-        </div>
-      </div>
-    <% end %>
-    <!-- tuiters -->
-    <%# Use it in your views %>
 
+
+
+
+    <!-- Contenido principal -->
+  <div class="col-lg-7 px-5">
+    <%= form_with model: Tweet.new, url: tweets_path, method: :post do |form| %>
+    <div class="tweet-form">
+      <div class="card">
+        <div class="card-body">
+          <div class="form-group">
+            <%= form.text_area :description, class: "form-control buscar", placeholder: "Escribe tu post"  %>
+          </div>
+          <div class="form-group py-2 mt-3">
+            <%= form.text_field :username, class: "form-control buscar", placeholder: "Ingresa tu Usuario" %>
+          </div>
+            <%= form.submit "Enviar", class: "btn boton1 mt-3" %>
+          </div>
+      </div>
+    </div>
+    <% end %>
+
+    <!-- Posts y paginación -->
     <%== pagy_bootstrap_nav(@pagy) %> <!--gema pagy-->
     <%= render "tweet" %>
     <%== pagy_bootstrap_nav(@pagy) %> <!--gema pagy-->
   </div>
-  <div class="col-lg-2">
-<h1>Hola</h1>
-</div>
-</div>
 
+  <div class="col-lg-3">
+    <!-- Sidebar Search -->
+    <div class="sidebar px-2">
+      <%= form_with url: root_path, method: :get do |form| %> <!--gema search-->
+      <!-- Cuadro de búsqueda de tweets anteriores -->
+      <div class="card mb-2">
+        <div class="card-body">
+          <div class="input-group">
+            <%= form.text_field :buscar, class: "form-control buscar", placeholder: "Buscar posts anteriores", value: @filtro %>
+            <%= form.submit 'Buscar', class: "btn btn-outline-primary" %>
+          </div>
+        </div>
+      </div>
+      <% end %>
+
+    <!--Card Tendencias -->
+    <div class="card">
+      <div class="card-body card-gato">
+        <h5 class="card-title">Tendencias para ti</h5>
+        <p class="card-text">¡Increíble! Un gato ha aprendido a volar y se convierte en el primer felino en conquistar los cielos. 😺✈️</p>
+        <p class="card-text"> ¡Un auténtico felino volador! 🐱🚀 #GatoVolador #IncreíblePeroCierto</p>
+        <%= image_tag("gato.jpg", width: 200)%>
+          <div class="card-footer">
+            <a href="#" class="card-link px-3"><i class="far fa-thumbs-up iconos"></i></a>
+            <a href="#" class="card-link px-3"><i class="far fa-comment iconos"></i></a>
+            <a href="#" class="card-link px-3"><i class="far fa-copy iconos"></i></a>
+          </div>
+          <a href="#" class="btn boton1">Ver noticia</a>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
