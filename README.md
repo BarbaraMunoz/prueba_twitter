@@ -1,5 +1,4 @@
-# README
-# prueba_twitter
+# Prueba - Introducción a desarrollo de aplicaciones con Ruby on Rails
 
 Requerimientos
 
